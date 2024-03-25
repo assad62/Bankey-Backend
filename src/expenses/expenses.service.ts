@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Expense } from './expenses.model';
+import { AccountType, Expense } from './expenses.model';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -15,8 +15,14 @@ export class ExpenseService {
     description: string,
     amount: number,
     userId: string,
+    accountType: AccountType,
   ): Promise<Expense> {
-    const newExpense = new this.expenseModel({ description, amount, userId });
+    const newExpense = new this.expenseModel({
+      description,
+      amount,
+      userId,
+      accountType,
+    });
     return await newExpense.save();
   }
 

@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../jwt/jwt-auth.guard';
 import { ExpenseService } from './expenses.service';
+import { AccountType } from './expenses.model';
 
 @Controller('expenses')
 @UseGuards(JwtAuthGuard)
@@ -21,9 +22,15 @@ export class ExpenseController {
     @Req() req,
     @Body('description') description: string,
     @Body('amount') amount: number,
+    @Body('accountType') accountType: AccountType,
   ) {
     const userId = req.user.userId;
-    return await this.expenseService.createExpense(description, amount, userId);
+    return await this.expenseService.createExpense(
+      description,
+      amount,
+      userId,
+      accountType,
+    );
   }
 
   @Get(':id')
