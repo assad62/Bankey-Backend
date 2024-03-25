@@ -24,7 +24,7 @@ export class ExpenseController {
     @Body('amount') amount: number,
     @Body('accountType') accountType: AccountType,
   ) {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     return await this.expenseService.createExpense(
       description,
       amount,
@@ -35,12 +35,12 @@ export class ExpenseController {
 
   @Get(':id')
   async getExpenseById(@Req() req, @Param('id') id: string) {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     return await this.expenseService.getExpenseById(id, userId);
   }
 
   @Get('user/:userId')
-  async getUserExpenses(@Param('userId') userId: string) {
+  async getExpenses(@Param('userId') userId: string) {
     return await this.expenseService.getExpenses(userId);
   }
 
@@ -55,7 +55,7 @@ export class ExpenseController {
 
   @Delete(':id')
   async deleteExpense(@Req() req, @Param('id') id: string) {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     return await this.expenseService.deleteExpense(id, userId);
   }
 }
