@@ -9,7 +9,8 @@ import { Expense, ExpenseSchema } from './expenses.model';
   imports: [
     MongooseModule.forFeature([{ name: Expense.name, schema: ExpenseSchema }]),
     JwtModule.register({
-      secret: process.env.JWT_SECRET_KEY, // Same secret key as used in JwtModule
+      secret:
+        '9a795401fc2320d7f49cd6cc3a4996e431414ff5ad859ed52a1f08ecb0ab271c', // Same secret key as used in JwtModule
       signOptions: { expiresIn: '1d' },
     }),
   ],
